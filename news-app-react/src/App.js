@@ -13,9 +13,46 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount(){
+    this.loginStatus()
+  }
+
+  handleLogin = (data) => {
+    this.setState({
+      isLoggedIn: true,
+      user: data.user
+    })
+  }
+
+  handleLogout = () => {
+    this.setState({
+      isLoggedIn: false,
+      user: {}
+    })
+  }
+
+  loginStatus = () => {
+    axios.get('http://localhost:3001/logged_in', {withCredentials: true})
+        .then(response => {
+          if(response.data.logged_in) {
+            this.handleLogin(response)
+          } else {
+            this.handleLogout()
+          }
+        })
+  }
+
   render() {
     return (
-      <div></div>
+      <div>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={} />
+            <Route exact path="/login" component={} />
+            <Route exact path="/signup" component={} />
+          </Switch>
+        </BrowserRouter>
+      </div>
     )
   }
 }
