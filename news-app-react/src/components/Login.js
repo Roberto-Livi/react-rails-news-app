@@ -55,34 +55,47 @@ class Login extends React.Component {
 
         const { username, password } = this.state
 
+        const inputColor = {
+            backgroundColor: "lightgrey"
+    }
+
         return (
             <div>
                 <h1>Log In</h1>
                 <form onSubmit={this.handleSubmit}>
+                <div className="ui inverted segment">
+                    <div className="two fields">
+                    <div className="field">
+                    <label>Username </label>
                     <input 
-                        placeholder="username"
+                        style={inputColor}
                         type="text"
                         name="username"
                         value={username}
                         onChange={this.handleChange}
                     />
+                    </div>
+                    <br />
 
+                    <div className="field">
+                    <label>Password </label>
                     <input 
-                        placeholder="password"
+                        style={inputColor}
                         type="password"
                         name="password"
                         value={password}
                         onChange={this.handleChange}
                     />
+                    </div>
+                    </div>
+                    <br />
 
-                    <button placeholder="submit" type="submit">
+                    <button className="ui submit button" type="submit">
                         Log In
                     </button>
-
-                    <div>
                         or <Link to="/signup">Sign Up</Link>
-                    </div>
 
+                    </div>
                 </form>
             </div>
         )
