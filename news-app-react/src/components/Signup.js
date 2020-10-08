@@ -1,17 +1,20 @@
 import React from 'react'
 import axios from 'axios'
 
-class Signup extends Component {
+class Signup extends React.Component {
 
     state = {
         username: '',
         password: '',
         password_confirmation: '',
-        errors: ''
+        errors: '',
+        admin: false
     }
 
     handleChange = (event) => {
-        const { name, value } = event.target
+        let { name, value, type, checked } = event.target
+        value = type === "checkbox" ? checked : value
+        console.log(value)
         this.setState({
             [name]: value
         })
@@ -19,12 +22,13 @@ class Signup extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        const { username, password, password_confirmation } = this.state
+        const { username, password, password_confirmation, admin } = this.state
 
         let user = {
             username: username,
             password: password,
-            password_confirmation: password_confirmation
+            password_confirmation: password_confirmation,
+            admin: admin
         }
 
         axios.post('http://localhost:3001/users', { user }, { withCredentials: true})
@@ -32,10 +36,12 @@ class Signup extends Component {
                 if(response.data.status === 'created') {
                     this.props.handleLogin(response.data)
                     this.redirect()
+                    console.log("created user")
                 } else {
                     this.setState({
                         errors: response.data.errors
                     })
+                    console.log("error creating user")
                 }
             })
     }
@@ -72,18 +78,23 @@ class Signup extends Component {
                     <input 
                         placeholder="password confirmation"
                         type="password"
-                        name="password confirmation"
+                        name="password_confirmation"
                         value={password_confirmation}
                         onChange={this.handleChange}
                     />
 
-                    <button placeholder="submit" type="submit">
-                        Log In
-                    </button>
+                    <input 
+                        name="admin"
+                        type="checkbox"
+                        checked={this.state.admin}
+                        onChange={this.handleChange}
+                    />
 
-                    <div>
-                        or <Link to="/signup">Sign Up</Link>
-                    </div>
+                    
+
+                    <button placeholder="submit" type="submit">
+                        Submit
+                    </button>
 
                 </form>
             </div>

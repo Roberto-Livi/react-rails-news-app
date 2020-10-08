@@ -1,7 +1,8 @@
-import Axios from 'axios'
 import React from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
-class Login extends Component {
+class Login extends React.Component {
 
     state = {
         username: '',
@@ -15,6 +16,7 @@ class Login extends Component {
 
     handleChange = (event) => {
         const { name, value } = event.target
+        console.log(event.target.value)
         this.setState({
             [name]: value
         })
@@ -26,7 +28,6 @@ class Login extends Component {
 
         let user = {
             username: username,
-            email: email,
             password: password
         }
 
@@ -35,10 +36,12 @@ class Login extends Component {
                 if(response.data.logged_in) {
                     this.props.handleLogin(response.data)
                     this.redirect()
+                    console.log("logged in")
                 } else {
                     this.setState({
                         errors: response.data.errors
                     })
+                    console.log("unable to log in")
                 }
             })
     }

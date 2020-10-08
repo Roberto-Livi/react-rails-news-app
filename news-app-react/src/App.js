@@ -8,19 +8,18 @@ import Signup from './components/Signup'
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
+  state = {
       isLoggedIn: false,
       user: {}
-    }
   }
+  
 
   componentDidMount(){
     this.loginStatus()
   }
 
   handleLogin = (data) => {
+    console.log("handleLogin")
     this.setState({
       isLoggedIn: true,
       user: data.user
@@ -35,7 +34,7 @@ class App extends React.Component {
   }
 
   loginStatus = () => {
-    axios.get('http://localhost:3001/logged_in', {withCredentials: true})
+    axios.get('http://localhost:3001/logged_in', { withCredentials: true })
         .then(response => {
           if(response.data.logged_in) {
             this.handleLogin(response)
@@ -54,7 +53,7 @@ class App extends React.Component {
               <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
             )} />
             <Route exact path="/login" render={props => (
-              <Login {...props} handleLogin={this.state.handleLogin} loggedInStatus={this.state.isLoggedIn}/>
+              <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>
             )} />
             <Route exact path="/signup" render={props => (
               <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
