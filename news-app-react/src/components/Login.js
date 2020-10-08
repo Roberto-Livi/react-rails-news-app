@@ -1,3 +1,4 @@
+import Axios from 'axios'
 import React from 'react'
 
 class Login extends Component {
@@ -6,6 +7,10 @@ class Login extends Component {
         username: '',
         password: '',
         errors: ''
+    }
+
+    componentDidMount() {
+        return this.props.loggedInStatus ? this.redirect() : null
     }
 
     handleChange = (event) => {
@@ -17,6 +22,29 @@ class Login extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
+        const { username, password } = this.state
+
+        let user = {
+            username: username,
+            email: email,
+            password: password
+        }
+
+        axios.post('http://localhost:3001/login', { user }, { withCredentials: true })
+            .then(response => {
+                if(response.data.logged_in) {
+                    this.props.handleLogin(response.data)
+                    this.redirect()
+                } else {
+                    this.setState({
+                        errors: response.data.errors
+                    })
+                }
+            })
+    }
+
+    redirect = () => {
+        this.props.history.push('/')
     }
 
 
