@@ -53,6 +53,10 @@ class Login extends React.Component {
 
     render() {
 
+        if(this.props.loggedInStatus){
+            this.props.history.push('/')
+        }
+
         const { username, password } = this.state
 
         const inputColor = {

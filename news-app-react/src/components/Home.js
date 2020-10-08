@@ -16,13 +16,19 @@ const Home = (props) => {
 
   return (
     <div>
+
+    { props.loggedInStatus ? null :
+    <div>
       <Link to='/login'>Log In</Link>
       <br></br>
       <Link to='/signup'>Sign Up</Link>
       <br></br>
+      </div>
+        }
       {
-        props.loggedInStatus ? <Link to="/logout" onClick={handleLogout}>Log Out</Link> : null
+        props.loggedInStatus ? <Link style={{color: "red"}} to="/logout" onClick={handleLogout}>Log Out</Link> : null
       }
+      
     </div>
   )
 }
