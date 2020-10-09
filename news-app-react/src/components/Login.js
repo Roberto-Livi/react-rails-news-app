@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { loginUser } from '../actions'
 
 class Login extends React.Component {
 
@@ -36,7 +37,7 @@ class Login extends React.Component {
             .then(response => {
                 if(response.data.logged_in) {
                     this.props.handleLogin(response.data)
-                    this.props.addUser(response.data.user)
+                    this.props.loginUser(response.data.user)
                     this.redirect()
                     console.log("logged in")
                 } else {
@@ -108,8 +109,5 @@ class Login extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    addUser: user => dispatch({ type: "LOGIN_USER", user})
-})
 
-export default connect(null, mapDispatchToProps)(Login)
+export default connect(null, { loginUser })(Login)

@@ -1,16 +1,21 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const CreateArticle = ({ loggedInStatus }) => {
+const CreateArticle = ({ loggedInStatus, admin }) => {
 
   return (
     <div>
-        { loggedInStatus ? 
+        { loggedInStatus && admin ?
         <div>
             CreateArticle
-        </div> : null
+        </div> : <div>Not an admin</div>
         }
     </div> 
   )
 }
 
-export default CreateArticle
+const mapStateToProps = ({ admin }) => {
+  return { admin }
+}
+
+export default connect(mapStateToProps)(CreateArticle)
