@@ -1,9 +1,10 @@
-import React from 'react';
+import React from 'react'
 import axios from 'axios'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Home from './components/Home'
 import Login from './components/Login'
 import Signup from './components/Signup'
+import CreateArticle from './components/article/CreateArticle'
 
 
 class App extends React.Component {
@@ -57,6 +58,9 @@ class App extends React.Component {
             )} />
             <Route exact path="/signup" render={props => (
               <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
+            )} />
+            <Route exact path="/createarticle" render={props => (
+              <CreateArticle {...props} handleLogin={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
             )} />
           </Switch>
         </BrowserRouter>
