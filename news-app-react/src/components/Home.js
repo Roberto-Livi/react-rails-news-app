@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { loginStatus } from '../actions/index'
 import AdminHomePage from './admin/AdminHomePage';
+import Articles from './Articles'
 
 const Home = (props) => {
 
@@ -21,9 +22,8 @@ const Home = (props) => {
 
     { props.loggedInStatus ? null :
     <div>
-      <Link to='/login'>Log In</Link>
-      <br></br>
-      <Link to='/signup'>Sign Up</Link>
+      <Link style={{position: "relative", left: "75vw"}} to='/login'>Log In</Link>
+      <Link style={{position: "relative", left: "85vw"}} to='/signup'>Sign Up</Link>
       <br></br>
       </div>
         }
@@ -38,6 +38,10 @@ const Home = (props) => {
 
         : null
       }
+      <hr/>
+      <div>
+        <Articles />
+      </div>
 
     </div>
   )

@@ -2,7 +2,7 @@ import users from '../api/users'
 import axios from 'axios'
 import {
     LOGIN_USER,
-    FETCH_USER,
+    FETCH_ARTICLES,
     CREATE_ARTICLE
 } from './types'
 
@@ -13,10 +13,10 @@ export const loginUser = (user) => {
     }
 }
 
-export const fetchUserInfo = (userId) => {
+export const fetchArticles = (articles) => {
     return {
-        type: FETCH_USER,
-        payload: userId
+        type: FETCH_ARTICLES,
+        payload: articles
     }
 }
 
@@ -37,4 +37,5 @@ export const loginStatus = () => {
             this.handleLogout()
           }
         })
-  }
+}
+

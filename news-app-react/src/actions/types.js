@@ -1,3 +1,3 @@
 export const LOGIN_USER = "LOGIN_USER";
-export const FETCH_USER = "FETCH_USER";
+export const FETCH_ARTICLES = "FETCH_ARTICLES";
 export const CREATE_ARTICLE = "CREATE_ARTICLE";

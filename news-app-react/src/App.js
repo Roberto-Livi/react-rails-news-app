@@ -5,6 +5,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import AdminHomePage from './components/admin/AdminHomePage'
 import CreateArticle from './components/admin/CreateArticle'
+import FrontPage from './components/FrontPage'
 
 
 class App extends React.Component {
@@ -48,6 +49,9 @@ class App extends React.Component {
             )} />
             <Route exact path="/createarticle" render={props => (
               <CreateArticle {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
+            )} />
+            <Route exact path="/frontpage" render={props => (
+              <FrontPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
             )} />
           </Switch>
         </BrowserRouter>
