@@ -1,4 +1,4 @@
-import { LOGIN_USER, FETCH_USER } from '../actions/types'
+import { LOGIN_USER, FETCH_USER, CREATE_ARTICLE } from '../actions/types'
 
 const INITIAL_STATE = {
     id: '', 
@@ -16,6 +16,9 @@ const manageUser = (state = INITIAL_STATE, action) => {
                 username: action.payload.username, 
                 admin: action.payload.admin 
             }
+        case CREATE_ARTICLE:
+            console.log("CREATE_ARTICLE")
+            return { ...state, articles: [...state.articles, action.payload] }
         default:
             return state;
     }

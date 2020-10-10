@@ -1,10 +1,10 @@
 import React from 'react'
-import axios from 'axios'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Home from './components/Home'
 import Login from './components/Login'
 import Signup from './components/Signup'
-import CreateArticle from './components/article/CreateArticle'
+import AdminHomePage from './components/admin/AdminHomePage'
+import CreateArticle from './components/admin/CreateArticle'
 
 
 class App extends React.Component {
@@ -12,11 +12,6 @@ class App extends React.Component {
   state = {
       isLoggedIn: false,
       user: {}
-  }
-  
-
-  componentDidMount(){
-    this.loginStatus()
   }
 
   handleLogin = (data) => {
@@ -34,17 +29,6 @@ class App extends React.Component {
     })
   }
 
-  loginStatus = () => {
-    axios.get('http://localhost:3001/logged_in', { withCredentials: true })
-        .then(response => {
-          if(response.data.logged_in) {
-            this.handleLogin(response)
-          } else {
-            this.handleLogout()
-          }
-        })
-  }
-
   render() {
     return (
       <div>
@@ -59,8 +43,11 @@ class App extends React.Component {
             <Route exact path="/signup" render={props => (
               <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
             )} />
+            <Route exact path="/adminhomepage" render={props => (
+              <AdminHomePage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
+            )} />
             <Route exact path="/createarticle" render={props => (
-              <CreateArticle {...props} handleLogin={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
+              <CreateArticle {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
             )} />
           </Switch>
         </BrowserRouter>

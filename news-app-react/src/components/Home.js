@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { loginStatus } from '../actions/index'
+import AdminHomePage from './admin/AdminHomePage';
 
 const Home = (props) => {
 
@@ -26,9 +28,17 @@ const Home = (props) => {
       </div>
         }
       {
-        props.loggedInStatus ? <Link style={{color: "red"}} to="/logout" onClick={handleLogout}>Log Out</Link> : null
+        props.loggedInStatus ? 
+
+        <div>
+        <Link style={{color: "red"}} to="/logout" onClick={handleLogout}>Log Out</Link>
+        <br />
+        <AdminHomePage loggedInStatus={loginStatus} />
+        </div>
+
+        : null
       }
-      
+
     </div>
   )
 }

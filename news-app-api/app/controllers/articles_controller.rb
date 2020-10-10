@@ -1,4 +1,4 @@
-class ArticlesController > ApplicationController
+class ArticlesController < ApplicationController
 
     def index
         @articles = Article.all
@@ -10,8 +10,8 @@ class ArticlesController > ApplicationController
     def create
         @article = Article.new(article_params)
         if @article.save
-            current_user.articles.create(article_params)
             render json: {
+                created: true,
                 article: @article
             }
         end
@@ -28,7 +28,7 @@ class ArticlesController > ApplicationController
     private
 
     def article_params
-        params.require(:article).permit(:title, :preview, :content, :user_id)
+        params.require(:article).permit(:title, :preview, :content, :category, :imageurl, :user_id)
     end
 
 end
