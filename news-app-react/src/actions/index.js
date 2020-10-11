@@ -13,11 +13,10 @@ export const loginUser = (user) => {
     }
 }
 
-export const fetchArticles = (articles) => {
-    return {
-        type: FETCH_ARTICLES,
-        payload: articles
-    }
+export const fetchArticles = () => async dispatch => {
+    const response = await users.get('/articles')
+
+    dispatch({ type: FETCH_ARTICLES, payload: response.data.articles })
 }
 
 export const createArticle = (article) => {

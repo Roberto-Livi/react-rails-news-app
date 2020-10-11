@@ -1,7 +1,6 @@
 import React from 'react'
 
 const FrontPage = ({ article }) => {
-    console.log(article)
     console.log("Front Page")
     return (
         <div>
