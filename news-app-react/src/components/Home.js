@@ -27,7 +27,7 @@ const Home = (props) => {
         props.loggedInStatus ? 
 
         <div>
-        <Link style={{color: "red"}} to="/logout" onClick={handleLogout}>Log Out</Link>
+        <Link style={{color: "red"}} to="/" onClick={handleLogout}>Log Out</Link>
         <br />
         <AdminHomePage loggedInStatus={props.loggedInStatus} />
         </div>

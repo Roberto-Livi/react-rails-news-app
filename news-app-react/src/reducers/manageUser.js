@@ -27,7 +27,13 @@ const manageUser = (state = INITIAL_STATE, action) => {
                 loggedIn: true
             }
         case LOGOUT_USER:
-            return { ...state, loggedIn: false, id: null }
+            console.log("LOGOUT_USER")
+            return { ...state, 
+                id: '', 
+                username: '', 
+                admin: false,
+                loggedIn: false,
+                articles: []  }
         case CREATE_USER:
             console.log("CREATE_USER")
             return { ...state, 

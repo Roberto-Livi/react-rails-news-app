@@ -11,26 +11,6 @@ import { connect } from 'react-redux'
 
 class App extends React.Component {
 
-  // state = {
-  //     isLoggedIn: false,
-  //     user: {}
-  // }
-
-  // handleLogin = (data) => {
-  //   console.log("handleLogin")
-  //   this.setState({
-  //     isLoggedIn: true,
-  //     user: data.user
-  //   })
-  // }
-
-  // handleLogout = () => {
-  //   this.setState({
-  //     isLoggedIn: false,
-  //     user: {}
-  //   })
-  // }
-
   render() {
     return (
       <div>
