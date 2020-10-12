@@ -1,5 +1,6 @@
 import React from 'react'
-import axios from 'axios'
+import { connect } from 'react-redux'
+import { createUser } from '../actions/index'
 
 class Signup extends React.Component {
 
@@ -50,19 +51,8 @@ class Signup extends React.Component {
             admin: admin
         }
 
-        axios.post('http://localhost:3001/users', { user }, { withCredentials: true})
-            .then(response => {
-                if(response.data.status === 'created') {
-                    this.props.handleLogin(response.data)
-                    this.redirect()
-                    console.log("created user")
-                } else {
-                    this.setState({
-                        errors: response.data.errors
-                    })
-                    console.log("error creating user")
-                }
-            })
+        this.props.createUser({ user })
+        this.redirect()
     }
 
     redirect = () => {
@@ -159,4 +149,4 @@ class Signup extends React.Component {
     }
 }
 
-export default Signup
+export default connect(null, { createUser })(Signup)

@@ -3,13 +3,24 @@ import axios from 'axios'
 import {
     LOGIN_USER,
     FETCH_ARTICLES,
-    CREATE_ARTICLE
+    CREATE_ARTICLE,
+    CREATE_USER
 } from './types'
 
 export const loginUser = (user) => {
     return { 
         type: LOGIN_USER, 
         payload: user
+    }
+}
+
+export const createUser = ({ user }) => async dispatch => {
+    const response = await users.post('/users', { user })
+
+    if(response.data.status === "created"){
+        return dispatch({ type: CREATE_USER, payload: response.data })
+    } else {
+        console.log("error signing up user")
     }
 }
 
