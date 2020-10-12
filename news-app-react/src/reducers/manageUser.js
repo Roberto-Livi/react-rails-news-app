@@ -1,12 +1,18 @@
-import { LOGIN_USER, FETCH_ARTICLES, CREATE_ARTICLE, CREATE_USER } from '../actions/types'
+import { 
+    LOGIN_USER, 
+    FETCH_ARTICLES, 
+    CREATE_ARTICLE, 
+    CREATE_USER,
+    LOGOUT_USER
+ } from '../actions/types'
 
 const INITIAL_STATE = {
     id: '', 
     username: '', 
-    admin: false, 
+    admin: false,
+    loggedIn: false,
     articles: [],
-    allArticles: [],
-    loggedIn: false
+    allArticles: []
 }
 
 const manageUser = (state = INITIAL_STATE, action) => {
@@ -15,17 +21,19 @@ const manageUser = (state = INITIAL_STATE, action) => {
             console.log("LOGIN_USER")
             console.log(action.payload)
             return { ...state, 
-                id: action.payload.id, 
-                username: action.payload.username, 
-                admin: action.payload.admin,
+                id: action.payload.user.id, 
+                username: action.payload.user.username, 
+                admin: action.payload.user.admin,
                 loggedIn: true
             }
+        case LOGOUT_USER:
+            return { ...state, loggedIn: false, id: null }
         case CREATE_USER:
             console.log("CREATE_USER")
             return { ...state, 
-                id: action.payload.id, 
-                username: action.payload.username, 
-                admin: action.payload.admin,
+                id: action.payload.user.id, 
+                username: action.payload.user.username, 
+                admin: action.payload.user.admin,
                 loggedIn: true
             }
         case CREATE_ARTICLE:

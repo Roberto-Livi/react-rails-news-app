@@ -6,29 +6,30 @@ import Signup from './components/Signup'
 import AdminHomePage from './components/admin/AdminHomePage'
 import CreateArticle from './components/admin/CreateArticle'
 import FrontPage from './components/FrontPage'
+import { connect } from 'react-redux'
 
 
 class App extends React.Component {
 
-  state = {
-      isLoggedIn: false,
-      user: {}
-  }
+  // state = {
+  //     isLoggedIn: false,
+  //     user: {}
+  // }
 
-  handleLogin = (data) => {
-    console.log("handleLogin")
-    this.setState({
-      isLoggedIn: true,
-      user: data.user
-    })
-  }
+  // handleLogin = (data) => {
+  //   console.log("handleLogin")
+  //   this.setState({
+  //     isLoggedIn: true,
+  //     user: data.user
+  //   })
+  // }
 
-  handleLogout = () => {
-    this.setState({
-      isLoggedIn: false,
-      user: {}
-    })
-  }
+  // handleLogout = () => {
+  //   this.setState({
+  //     isLoggedIn: false,
+  //     user: {}
+  //   })
+  // }
 
   render() {
     return (
@@ -36,22 +37,22 @@ class App extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" render={props => (
-              <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
+              <Home {...props} loggedInStatus={this.props.loggedIn} />
             )} />
             <Route exact path="/login" render={props => (
-              <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>
+              <Login {...props} loggedInStatus={this.props.loggedIn}/>
             )} />
             <Route exact path="/signup" render={props => (
-              <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
+              <Signup {...props} loggedInStatus={this.props.loggedIn} />
             )} />
             <Route exact path="/adminhomepage" render={props => (
-              <AdminHomePage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
+              <AdminHomePage {...props} loggedInStatus={this.props.loggedIn} />
             )} />
             <Route exact path="/createarticle" render={props => (
-              <CreateArticle {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
+              <CreateArticle {...props} loggedInStatus={this.props.loggedIn} />
             )} />
             <Route exact path="/frontpage" render={props => (
-              <FrontPage {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
+              <FrontPage {...props} loggedInStatus={this.props.loggedIn} />
             )} />
           </Switch>
         </BrowserRouter>
@@ -59,6 +60,10 @@ class App extends React.Component {
     )
   }
 }
+
+const mapStateToProps = ({ loggedIn }) => {
+  return { loggedIn }
+}
   
 
-export default App;
+export default connect(mapStateToProps)(App)

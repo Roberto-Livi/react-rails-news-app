@@ -1,19 +1,15 @@
 import React from 'react';
-import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { loginStatus } from '../actions/index'
 import AdminHomePage from './admin/AdminHomePage';
 import Articles from './Articles'
+import { logoutUser } from '../actions/index'
+import { connect } from 'react-redux'
 
 const Home = (props) => {
 
     const handleLogout = () => {
-        axios.delete('http://localhost:3001/logout', { withCredentials: true})
-            .then(response => {
-                props.handleLogout()
-                props.history.push('/')
-            })
-            console.log("user logged out")
+      props.logoutUser()
+      props.history.push('/')
     }
 
 
@@ -33,7 +29,7 @@ const Home = (props) => {
         <div>
         <Link style={{color: "red"}} to="/logout" onClick={handleLogout}>Log Out</Link>
         <br />
-        <AdminHomePage loggedInStatus={loginStatus} />
+        <AdminHomePage loggedInStatus={props.loggedInStatus} />
         </div>
 
         : null
@@ -47,4 +43,4 @@ const Home = (props) => {
   )
 }
 
-export default Home
+export default connect(null, { logoutUser })(Home)

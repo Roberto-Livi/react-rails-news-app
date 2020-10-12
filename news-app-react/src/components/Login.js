@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loginUser } from '../actions'
@@ -10,10 +9,6 @@ class Login extends React.Component {
         username: '',
         password: '',
         errors: ''
-    }
-
-    componentDidMount() {
-        return this.props.loggedInStatus ? this.redirect() : null
     }
 
     handleChange = (event) => {
@@ -32,20 +27,9 @@ class Login extends React.Component {
             password: password
         }
 
-        axios.post('http://localhost:3001/login', { user }, { withCredentials: true })
-            .then(response => {
-                if(response.data.logged_in) {
-                    this.props.handleLogin(response.data)
-                    this.props.loginUser(response.data.user)
-                    this.redirect()
-                    console.log("logged in")
-                } else {
-                    this.setState({
-                        errors: response.data.errors
-                    })
-                    console.log("unable to log in")
-                }
-            })
+        this.props.loginUser({ user })
+        this.redirect()
+                    
     }
 
     redirect = () => {
